@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wx.multiwindow">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:resizeableActivity="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activity1" android:resizeableActivity="true">
+            <layout
+                android:defaultHeight="500dp"
+                android:defaultWidth="600dp"
+                android:gravity="top|end"
+                android:minHeight="150dp"
+                android:minWidth="100dp" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity2" android:resizeableActivity="true">
+            <layout
+                android:defaultHeight="300dp"
+                android:defaultWidth="300dp"
+                android:gravity="top|end"
+                android:minHeight="100dp"
+                android:minWidth="100dp" />
+        </activity>
+    </application>
+
+</manifest>
