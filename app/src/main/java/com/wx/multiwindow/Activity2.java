@@ -122,7 +122,16 @@ public class Activity2 extends BaseActivity {
     public void clear(View v) {
         mBuilder.delete(0, mBuilder.length());
         mTextView.setText("");
+    }
+
+    /**
+     * 重置
+     *
+     * @param v
+     */
+    public void reset(View v) {
         mDrawImageView.setVisibility(View.GONE);
         mDrawTextView.setVisibility(View.VISIBLE);
+        clear(v);
     }
 }
