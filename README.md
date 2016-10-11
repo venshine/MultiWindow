@@ -8,7 +8,7 @@
     * [分屏模式](https://github.com/venshine/MultiWindow#分屏模式)  
     * [自由形状模式](https://github.com/venshine/MultiWindow#自由形状模式)
 * [功能简介](https://github.com/venshine/MultiWindow#功能简介)    
-    * [禁用多窗口模式](https://github.com/venshine/MultiWindow#禁用多窗口模式)  
+    * [禁用多窗口模式](https://github.com/venshine/MultiWindow#禁用多窗口模式)  
     * [多窗口变更通知和查询](https://github.com/venshine/MultiWindow#多窗口变更通知和查询)
     * [在多窗口模式中启动新 Activity](https://github.com/venshine/MultiWindow#在多窗口模式中启动新-activity)
     * [为多窗口模式准备的布局属性](https://github.com/venshine/MultiWindow#为多窗口模式准备的布局属性)
