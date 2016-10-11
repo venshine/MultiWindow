@@ -2,7 +2,7 @@
 
 [![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
 
-学习教程：[https://github.com/venshine/MultiWindow/wiki](https://github.com/venshine/MultiWindow/wiki)
+**开发文档：**[https://github.com/venshine/MultiWindow/wiki](https://github.com/venshine/MultiWindow/wiki)
 
 ## 多窗口模式
 
