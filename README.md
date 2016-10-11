@@ -2,7 +2,21 @@
 
 [![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
 
-**开发文档：**[https://github.com/venshine/MultiWindow/wiki](https://github.com/venshine/MultiWindow/wiki)
+## 大纲
+* [开发文档](https://github.com/venshine/MultiWindow#开发文档)
+* [多窗口模式](https://github.com/venshine/MultiWindow#多窗口模式)
+    * [分屏模式](https://github.com/venshine/MultiWindow#分屏模式)
+    * [自由形状模式](https://github.com/venshine/MultiWindow#自由形状模式)
+* [功能简介](https://github.com/venshine/MultiWindow#功能简介)
+    * [禁用多窗口模式](https://github.com/venshine/MultiWindow#禁用多窗口模式)
+    * [多窗口变更通知和查询](https://github.com/venshine/MultiWindow#多窗口变更通知和查询)
+    * [在多窗口模式中启动新 Activity](https://github.com/venshine/MultiWindow#在多窗口模式中启动新 Activity)
+    * [为多窗口模式准备的布局属性](https://github.com/venshine/MultiWindow#为多窗口模式准备的布局属性)
+    * [支持拖放](https://github.com/venshine/MultiWindow#支持拖放)
+* [参考](https://github.com/venshine/MultiWindow#参考)
+
+## 开发文档
+[https://github.com/venshine/MultiWindow/wiki](https://github.com/venshine/MultiWindow/wiki)
 
 ## 多窗口模式
 
@@ -27,7 +41,7 @@
 
 ![](https://raw.githubusercontent.com/venshine/MultiWindow/master/image/screenshot2.png)
 
-## 简易教程
+## 功能简介
 
 ### 禁用多窗口模式
 该属性为true时将支持多窗口模式，为false时不支持，以全屏模式展示。（该属性默认值为true）
