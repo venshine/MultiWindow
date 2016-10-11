@@ -12,7 +12,7 @@
 
 长按Overview按钮进入到分屏模式。
 
-![]((https://raw.githubusercontent.com/venshine/MultiWindow/master/image/screenshot1.png))
+![](https://raw.githubusercontent.com/venshine/MultiWindow/master/image/screenshot1.png)
 
 ### 自由形状模式
 
@@ -25,7 +25,7 @@
 * 进入设置-开发者选项，然后滑动到界面最底部，打开强制将活动设为可调整大小按钮
 * 重启模拟器或设备
 
-![]((https://raw.githubusercontent.com/venshine/MultiWindow/master/image/screenshot2.png))
+![](https://raw.githubusercontent.com/venshine/MultiWindow/master/image/screenshot2.png)
 
 ## 简易教程
 
