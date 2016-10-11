@@ -75,6 +75,9 @@
 ```
 
 ### 支持拖放
+
+![](https://raw.githubusercontent.com/venshine/MultiWindow/master/image/screenshot3.gif)
+
 发起拖放事件（[FirstActivity](https://github.com/venshine/MultiWindow/blob/master/app/src/main/java/com/wx/multiwindow/FirstActivity.java)）
 ```
     mImageView.setTag("Drag an ImageView from First Activity");
