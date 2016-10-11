@@ -23,6 +23,88 @@
 * 进入设置-开发者选项，然后滑动到界面最底部，打开强制将活动设为可调整大小按钮
 * 重启模拟器或设备
 
-## 参考
+## 简易教程
+
+### 禁用多窗口模式
+该属性为true时将支持多窗口模式，为false时不支持，以全屏模式展示。（该属性默认值为true）
+```
+    android:resizeableActivity=["true" | "false"]
+```
+
+### 多窗口变更通知和查询
+```
+    Activity.isInMultiWindowMode()    // 调用该方法以确认 Activity 是否处于多窗口模式
+
+    Activity.onMultiWindowModeChanged()     // Activity 进入或退出多窗口模式时系统将调用此方法
+```
+
+### 在多窗口模式中启动新 Activity
+当满足下面的条件，系统会让这两个Activity进入分屏模式：
+* 当前Activity已经进入到分屏模式。
+* 新打开的Activity支持分屏浏览（即android:resizeableActivity=true）。
+```
+    Intent intent = new Intent(this, SecondActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT | Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(intent);
+```
+
+### 为多窗口模式准备的布局属性
+```
+    android:defaultWidth   // 以自由形状模式启动时 Activity 的默认宽度
+    android:defaultHeight  // 以自由形状模式启动时 Activity 的默认高度
+    android:gravity        // 以自由形状模式启动时 Activity 的初始位置
+    android:minHeight、android:minWidth    // 分屏和自由形状模式中 Activity 的最小高度和最小宽度。 如果用户在分屏模式中移动分界线，使 Activity 尺寸低于指定的最小值，系统会将 Activity 裁剪为用户请求的尺寸 
+```
+
+### 支持拖放
+发起拖放事件（FirstActivity）
+```
+    mImageView.setTag("Drag an ImageView from First Activity");
+        mImageView.setOnLongClickListener(new View.OnLongClickListener() {
+
+            public boolean onLongClick(View view) {
+                Uri uri = getUri(mActivity, R.mipmap.ic_launcher);
+                ClipData dragData = ClipData.newPlainText("", (CharSequence) view.getTag());
+                ClipData.Item imageItem = new ClipData.Item(uri);
+                dragData.addItem(imageItem);
+                View.DragShadowBuilder shadow = new View.DragShadowBuilder(view);
+                view.startDragAndDrop(dragData, shadow, view, View.DRAG_FLAG_GLOBAL);
+                return true;
+            }
+        });
+```
+
+接收拖放结果（SecondActivity）
+```
+        mDrawTextView.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                switch (dragEvent.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        break;
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        break;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        break;
+                    case DragEvent.ACTION_DRAG_LOCATION:
+                        break;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        break;
+                    case DragEvent.ACTION_DROP:
+                        mDrawTextView.setVisibility(View.GONE);
+                        mDrawImageView.setVisibility(View.VISIBLE);
+                        ClipData clipData = dragEvent.getClipData();
+                        mDrawImageView.setImageURI(clipData.getItemAt(1).getUri());
+                        Toast.makeText(mActivity, clipData.getItemAt(0).getText(), Toast.LENGTH_LONG).show();
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+```
+
+
 
 
