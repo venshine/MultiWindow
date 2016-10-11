@@ -57,7 +57,7 @@
 ```
 
 ### 支持拖放
-发起拖放事件（FirstActivity）
+发起拖放事件（[FirstActivity](https://github.com/venshine/MultiWindow/blob/master/app/src/main/java/com/wx/multiwindow/FirstActivity.java)）
 ```
     mImageView.setTag("Drag an ImageView from First Activity");
         mImageView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -74,7 +74,7 @@
         });
 ```
 
-接收拖放结果（SecondActivity）
+接收拖放结果（[SecondActivity](https://github.com/venshine/MultiWindow/blob/master/app/src/main/java/com/wx/multiwindow/SecondActivity.java)）
 ```
         mDrawTextView.setOnDragListener(new View.OnDragListener() {
             @Override
