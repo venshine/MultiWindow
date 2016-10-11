@@ -106,6 +106,7 @@
 ```
 
 ## 参考
+* [开发文档](https://github.com/venshine/MultiWindow/wiki)
 * [官方Sample](https://github.com/googlesamples/android-MultiWindowPlayground)
 
 ## About
