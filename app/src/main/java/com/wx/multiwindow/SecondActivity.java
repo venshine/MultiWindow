@@ -31,7 +31,7 @@ import android.widget.Toast;
  *
  * @author venshine
  */
-public class Activity2 extends BaseActivity {
+public class SecondActivity extends BaseActivity {
 
     private static StringBuilder mBuilder = new StringBuilder();
     private TextView mTextView;

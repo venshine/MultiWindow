@@ -11,7 +11,7 @@
         android:resizeableActivity="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity1" android:resizeableActivity="true">
+        <activity android:name=".FirstActivity" android:resizeableActivity="true">
             <layout
                 android:defaultHeight="500dp"
                 android:defaultWidth="600dp"
@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity2" android:resizeableActivity="true">
+        <activity android:name=".SecondActivity" android:resizeableActivity="true">
             <layout
                 android:defaultHeight="300dp"
                 android:defaultWidth="300dp"

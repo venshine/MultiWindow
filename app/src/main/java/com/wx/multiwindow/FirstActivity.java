@@ -33,7 +33,7 @@ import com.wx.android.common.util.VibratorUtils;
  *
  * @author venshine
  */
-public class Activity1 extends BaseActivity {
+public class FirstActivity extends BaseActivity {
 
     private static StringBuilder mBuilder = new StringBuilder();
     private TextView mTextView;
@@ -101,7 +101,7 @@ public class Activity1 extends BaseActivity {
      * @param v
      */
     public void click(View v) {
-        Intent intent = new Intent(this, Activity2.class);
+        Intent intent = new Intent(this, SecondActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
