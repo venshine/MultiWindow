@@ -1,153 +1,71 @@
-# Android N 多窗口支持
+# MultiWindow
 
 [![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
 
-## 大纲
-* [开发文档](https://github.com/venshine/MultiWindow#开发文档)  
-* [多窗口模式](https://github.com/venshine/MultiWindow#多窗口模式)    
-    * [分屏模式](https://github.com/venshine/MultiWindow#分屏模式)  
-    * [自由形状模式](https://github.com/venshine/MultiWindow#自由形状模式)
-* [功能简介](https://github.com/venshine/MultiWindow#功能简介)    
-    * [禁用多窗口模式](https://github.com/venshine/MultiWindow#禁用多窗口模式)  
-    * [多窗口变更通知和查询](https://github.com/venshine/MultiWindow#多窗口变更通知和查询)
-    * [在多窗口模式中启动新 Activity](https://github.com/venshine/MultiWindow#在多窗口模式中启动新-activity)
-    * [为多窗口模式准备的布局属性](https://github.com/venshine/MultiWindow#为多窗口模式准备的布局属性)
-    * [支持拖放](https://github.com/venshine/MultiWindow#支持拖放)
-* [参考](https://github.com/venshine/MultiWindow#参考)
+[中文](README-CN.md)
 
-## 开发文档
-[https://github.com/venshine/MultiWindow/wiki](https://github.com/venshine/MultiWindow/wiki)
+A Kotlin demo app for **multi-window and large-screen behavior** on Android: it shows the window size, multi-window and picture-in-picture state live, launches a page in the adjacent window, drags text across windows, and keeps its log across configuration changes. It is a demo app, not a library (no Maven coordinate).
 
-## 多窗口模式
+- Version 2.0.0, minSdk 24, targetSdk 36, Kotlin, AppCompat DayNight (no Material Components).
+- Download the sample APK from the [Releases page](https://github.com/venshine/MultiWindow/releases).
 
-多窗口模式有两种，分屏模式和自由形状模式。
+## Screenshot
 
-### 分屏模式
+| Light | Dark |
+|:---:|:---:|
+| <img src="screenshot/multi-window-light.png" width="240" alt="MultiWindow" /> | <img src="screenshot/multi-window-dark.png" width="240" alt="MultiWindow" /> |
 
-长按Overview按钮进入到分屏模式。
+Screenshots are rendered by Robolectric.
 
-![](https://raw.githubusercontent.com/venshine/MultiWindow/master/image/screenshot1.png)
+## What the demo covers
 
-### 自由形状模式
+| Feature | Where |
+|---|---|
+| Live window size (`Configuration.screenWidthDp/HeightDp`), multi-window and PiP state | `BaseActivity.refresh()` |
+| Callbacks: `onMultiWindowModeChanged(Boolean, Configuration)`, `onPictureInPictureModeChanged(Boolean, Configuration)` | `BaseActivity` |
+| Launch in the adjacent window: `FLAG_ACTIVITY_LAUNCH_ADJACENT or FLAG_ACTIVITY_NEW_TASK` | `BaseActivity.openAdjacent()` |
+| Cross-window text drag and drop (`startDragAndDrop` + `DRAG_FLAG_GLOBAL`, `OnDragListener`) | `BaseActivity`, `DropParser` |
+| Keep state across recreation with `ViewModel` | `WindowViewModel`, `SecondActivity` |
+| Handle configuration changes yourself (`configChanges`) + PiP | `FirstActivity` |
 
-开启自由形状模式步骤如下：
+```kotlin
+// Query and callback (the single-argument overload is deprecated since API 26)
+val inMultiWindow = isInMultiWindowMode
+override fun onMultiWindowModeChanged(isInMultiWindowMode: Boolean, newConfig: Configuration) { ... }
 
-* 打开模拟器或者用usb线连接已root的设备（前提是要root）
-* 命令行（终端）中输入adb shell
-* 然后输入su命令，获取root权限授权（此步要在手机上允许授权）
-* 输入命令代码 settings put global enable_freeform_support 1
-* 进入设置-开发者选项，然后滑动到界面最底部，打开强制将活动设为可调整大小按钮
-* 重启模拟器或设备
-
-![](https://raw.githubusercontent.com/venshine/MultiWindow/master/image/screenshot2.png)
-
-## 功能简介
-
-### 禁用多窗口模式
-该属性为true时将支持多窗口模式，为false时不支持，以全屏模式展示。（该属性默认值为true）
-```
-    android:resizeableActivity=["true" | "false"]
+// Open another activity in the adjacent window (best effort, not guaranteed)
+startActivity(
+    Intent(this, SecondActivity::class.java)
+        .addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT or Intent.FLAG_ACTIVITY_NEW_TASK)
+)
 ```
 
-### 多窗口变更通知和查询
-```
-    Activity.isInMultiWindowMode()    // 调用该方法以确认 Activity 是否处于多窗口模式
+## What changed in Android (checked against the official docs)
 
-    Activity.onMultiWindowModeChanged()     // Activity 进入或退出多窗口模式时系统将调用此方法
-```
+All statements below were checked against the page quoted in the link.
 
-### 在多窗口模式中启动新 Activity
-当满足下面的条件，系统会让这两个Activity进入分屏模式：
-* 当前Activity已经进入到分屏模式。
-* 新打开的Activity支持分屏浏览（即android:resizeableActivity=true）。
-```
-    Intent intent = new Intent(this, SecondActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT | Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(intent);
-```
+1. **Android 12 (API 31) makes multi-window standard.** On large screens (medium / expanded window size class) all apps support multi-window regardless of configuration; `resizeableActivity="false"` puts the app in compatibility mode when needed. On small screens the system checks `minWidth` / `minHeight`, and `resizeableActivity="false"` still blocks multi-window. [Support multi-window mode](https://developer.android.com/develop/ui/compose/layouts/adaptive/support-multi-window-mode)
+2. **Android 12L (API 32):** the Recents screen gets a **Split** action, and `FLAG_ACTIVITY_LAUNCH_ADJACENT` can make a full-screen app enter split-screen and open the target in the adjacent window (same page, "Programmatic split-screen"). OEMs can enable this behavior on older versions.
+3. **Multi-resume (Android 10+):** all visible activities stay `RESUMED` in multi-window; use `onTopResumedActivityChanged()` for exclusive resources such as camera / microphone. Before Android 10 only the most recently used one is resumed. Same page.
+4. **Android 16 (API 36), apps with targetSdk 36:** on displays with smallest width >= 600dp, `screenOrientation`, `resizeableActivity`, `minAspectRatio`, `maxAspectRatio`, `setRequestedOrientation()` and `getRequestedOrientation()` are ignored (the app is resizable and fills the window, no pillarboxing). Exceptions: games (`android:appCategory`), users who opt in to the app's default behavior in the aspect-ratio settings, and displays smaller than sw600dp. A temporary opt-out is `PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY`, and it will **not** work for apps targeting API 37. [Behavior changes: Android 16](https://developer.android.com/about/versions/16/behavior-changes-16), [App orientation, aspect ratio, and resizability](https://developer.android.com/develop/ui/compose/layouts/adaptive/app-orientation-aspect-ratio-resizability)
+   - Consequence for this demo: the `resizeableActivity="true"` in `AndroidManifest.xml` only matters below sw600dp or below targetSdk 36; on large screens it is ignored. Rotation and window resizing recreate activities more often, so state must be preserved ([Save UI states](https://developer.android.com/topic/libraries/architecture/saving-states)).
+5. **How to enable freeform (desktop) windows today:** the official docs only say desktop windowing "can be enabled by manufacturers of large screen devices" ([Support multi-window mode](https://developer.android.com/develop/ui/compose/layouts/adaptive/support-multi-window-mode)). The official developer-preview post says to use a Pixel Tablet on Android 15 QPR1 Beta 2 or the Pixel Tablet emulator, then select **Enable freeform windows** in Developer options; it does not mention root ([Android Developers Blog, Sep 2024](https://android-developers.googleblog.com/2024/09/developer-preview-desktop-windowing-on-android-tablets.html)). So the old recipe of rooting and running `settings put global enable_freeform_support 1` is no longer the documented path. **Pending confirmation:** the current stable-release steps and whether the toggle exists on a given device or OEM build (it is device-dependent; no official stable-release page was found).
 
-### 为多窗口模式准备的布局属性
-```
-    android:defaultWidth   // 以自由形状模式启动时 Activity 的默认宽度
-    android:defaultHeight  // 以自由形状模式启动时 Activity 的默认高度
-    android:gravity        // 以自由形状模式启动时 Activity 的初始位置
-    android:minHeight、android:minWidth    // 分屏和自由形状模式中 Activity 的最小高度和最小宽度。 如果用户在分屏模式中移动分界线，使 Activity 尺寸低于指定的最小值，系统会将 Activity 裁剪为用户请求的尺寸 
-```
+## Migration from 1.x (Android N demo)
 
-### 支持拖放
+- Rewritten in Kotlin; `compileSdk` / `targetSdk` 36, `minSdk` 24 (unchanged).
+- Dropped the `com.wx.android.common` dependency and the old support library; the old log buffer (a static `StringBuilder`) is replaced by a `ViewModel`.
+- Drag and drop now carries plain text only (the old image drag is removed).
+- Not applicable: Android N-only instructions in the old README (rooting for freeform mode); see item 5 above.
 
-![](https://raw.githubusercontent.com/venshine/MultiWindow/master/image/screenshot3.gif)
+## Alternatives
 
-发起拖放事件（[FirstActivity](https://github.com/venshine/MultiWindow/blob/master/app/src/main/java/com/wx/multiwindow/FirstActivity.java)）
-```
-    mImageView.setTag("Drag an ImageView from First Activity");
-        mImageView.setOnLongClickListener(new View.OnLongClickListener() {
+For apps with multiple panes use [Activity embedding](https://developer.android.com/develop/ui/views/layout/activity-embedding) (Jetpack WindowManager); for adaptive layouts use [window size classes](https://developer.android.com/develop/ui/compose/layouts/adaptive/window-size-classes). Google's old [MultiWindowPlayground](https://github.com/googlesamples/android-MultiWindowPlayground) sample is the official reference for Android N.
 
-            public boolean onLongClick(View view) {
-                Uri uri = getUri(mActivity, R.mipmap.ic_launcher);
-                ClipData dragData = ClipData.newPlainText("", (CharSequence) view.getTag());
-                ClipData.Item imageItem = new ClipData.Item(uri);
-                dragData.addItem(imageItem);
-                View.DragShadowBuilder shadow = new View.DragShadowBuilder(view);
-                view.startDragAndDrop(dragData, shadow, view, View.DRAG_FLAG_GLOBAL);
-                return true;
-            }
-        });
-```
+## Maintenance
 
-接收拖放结果（[SecondActivity](https://github.com/venshine/MultiWindow/blob/master/app/src/main/java/com/wx/multiwindow/SecondActivity.java)）
-```
-        mDrawTextView.setOnDragListener(new View.OnDragListener() {
-            @Override
-            public boolean onDrag(View view, DragEvent dragEvent) {
-                switch (dragEvent.getAction()) {
-                    case DragEvent.ACTION_DRAG_STARTED:
-                        break;
-                    case DragEvent.ACTION_DRAG_ENTERED:
-                        break;
-                    case DragEvent.ACTION_DRAG_EXITED:
-                        break;
-                    case DragEvent.ACTION_DRAG_LOCATION:
-                        break;
-                    case DragEvent.ACTION_DRAG_ENDED:
-                        break;
-                    case DragEvent.ACTION_DROP:
-                        mDrawTextView.setVisibility(View.GONE);
-                        mDrawImageView.setVisibility(View.VISIBLE);
-                        ClipData clipData = dragEvent.getClipData();
-                        mDrawImageView.setImageURI(clipData.getItemAt(1).getUri());
-                        Toast.makeText(mActivity, clipData.getItemAt(0).getText(), Toast.LENGTH_LONG).show();
-                        break;
-                    default:
-                        break;
-                }
-                return true;
-            }
-        });
-```
-
-## 参考
-* [开发文档](https://github.com/venshine/MultiWindow/wiki)
-* [官方Sample](https://github.com/googlesamples/android-MultiWindowPlayground)
-
-## About
-* Email：venshine.cn@gmail.com
+Maintained as a small demo. Real-device checks (adjacent launch, cross-window drag, PiP, freeform) are not covered by the automated tests.
 
 ## License
-    Copyright (C) 2016 venshine.cn@gmail.com
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-    
-    http://www.apache.org/licenses/LICENSE-2.0
-    
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
-
-
-
+Apache License 2.0, see [LICENSE](LICENSE).

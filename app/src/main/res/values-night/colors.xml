@@ -1,0 +1,5 @@
+<resources>
+    <color name="panel">#2B2D36</color>
+    <color name="drag_source">#3F4670</color>
+    <color name="on_panel">#E4E4EA</color>
+</resources>

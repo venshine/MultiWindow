@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wx.multiwindow">
-
-    <uses-permission android:name="android.permission.VIBRATE" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:resizeableActivity="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FirstActivity" android:resizeableActivity="true">
+
+        <!--
+            supportsPictureInPicture 要求同时声明 configChanges，由本页自己处理窗口变化；
+            <layout> 的默认尺寸和最小尺寸只在自由窗口（桌面窗口）模式下用于首次启动。
+        -->
+        <activity
+            android:name=".FirstActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:exported="true"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true">
             <layout
-                android:defaultHeight="500dp"
                 android:defaultWidth="600dp"
+                android:defaultHeight="500dp"
                 android:gravity="top|end"
-                android:minHeight="150dp"
-                android:minWidth="100dp" />
+                android:minWidth="100dp"
+                android:minHeight="150dp" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity" android:resizeableActivity="true">
+
+        <!-- 不声明 configChanges：尺寸变化会重建 Activity，用来演示 ViewModel 保留状态 -->
+        <activity
+            android:name=".SecondActivity"
+            android:exported="false"
+            android:resizeableActivity="true">
             <layout
-                android:defaultHeight="300dp"
                 android:defaultWidth="300dp"
+                android:defaultHeight="300dp"
                 android:gravity="top|end"
-                android:minHeight="100dp"
-                android:minWidth="100dp" />
+                android:minWidth="100dp"
+                android:minHeight="100dp" />
         </activity>
     </application>
 

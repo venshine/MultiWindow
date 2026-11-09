@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">MultiWindow</string>
+    <string name="app_name" translatable="false">MultiWindow</string>
+    <string name="first_title">First Activity</string>
+    <string name="second_title">Second Activity</string>
+    <string name="window_info">Window: %1$d × %2$d dp\nMulti-window: %3$s\nPicture-in-picture: %4$s</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="open_adjacent">Open the other page in the adjacent window</string>
+    <string name="enter_pip">Enter picture-in-picture</string>
+    <string name="clear_log">Clear log</string>
+    <string name="drag_payload_first">Text dragged from First Activity (long press to drag)</string>
+    <string name="drag_payload_second">Text dragged from Second Activity (long press to drag)</string>
+    <string name="drop_hint">Drop text here</string>
+    <string name="dropped">Dropped: %1$s</string>
 </resources>

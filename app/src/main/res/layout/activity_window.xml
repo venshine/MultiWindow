@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 内容可滚动：窗口被压得很小时按钮也能点到 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/window_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/panel"
+                android:fontFamily="monospace"
+                android:padding="12dp"
+                android:textColor="@color/on_panel" />
+
+            <Button
+                android:id="@+id/open_adjacent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/open_adjacent" />
+
+            <Button
+                android:id="@+id/enter_pip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_pip" />
+
+            <TextView
+                android:id="@+id/drag_source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/drag_source"
+                android:gravity="center"
+                android:minHeight="56dp"
+                android:padding="8dp"
+                android:textColor="@color/on_panel" />
+
+            <TextView
+                android:id="@+id/drop_zone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/panel"
+                android:gravity="center"
+                android:minHeight="72dp"
+                android:padding="8dp"
+                android:text="@string/drop_hint"
+                android:textColor="@color/on_panel" />
+
+            <Button
+                android:id="@+id/clear_log"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/clear_log" />
+
+            <TextView
+                android:id="@+id/log"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

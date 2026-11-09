@@ -1,0 +1,14 @@
+<resources>
+    <string name="first_title">第一页</string>
+    <string name="second_title">第二页</string>
+    <string name="window_info">窗口：%1$d × %2$d dp\n多窗口：%3$s\n画中画：%4$s</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="open_adjacent">在相邻窗口打开另一页</string>
+    <string name="enter_pip">进入画中画</string>
+    <string name="clear_log">清理日志</string>
+    <string name="drag_payload_first">来自第一页的文本（长按拖动）</string>
+    <string name="drag_payload_second">来自第二页的文本（长按拖动）</string>
+    <string name="drop_hint">把文本拖到这里</string>
+    <string name="dropped">已接收：%1$s</string>
+</resources>
