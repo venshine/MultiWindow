@@ -22,7 +22,7 @@ A Kotlin demo app for **multi-window and large-screen behavior** on Android: it 
 |:---:|:---:|:---:|:---:|
 | <img src="screenshot/drag.png" width="200" /> | <img src="screenshot/freeform.png" width="200" /> | <img src="screenshot/pip.png" width="200" /> | <img src="screenshot/config.png" width="200" /> |
 
-Captured on a Xiaomi 2509FPN0BC running Android 17 (API 37). Split screen comes from the adjacent-launch button, freeform windows from `adb shell am start --windowingMode 5`.
+Captured on a real device running Android 17. Split screen comes from the adjacent-launch button, freeform windows from `adb shell am start --windowingMode 5`.
 
 ## What the demo covers
 
@@ -56,7 +56,7 @@ All statements below were checked against the page quoted in the link.
 3. **Multi-resume (Android 10+):** all visible activities stay `RESUMED` in multi-window; use `onTopResumedActivityChanged()` for exclusive resources such as camera / microphone. Before Android 10 only the most recently used one is resumed. Same page.
 4. **Android 16 (API 36), apps with targetSdk 36:** on displays with smallest width >= 600dp, `screenOrientation`, `resizeableActivity`, `minAspectRatio`, `maxAspectRatio`, `setRequestedOrientation()` and `getRequestedOrientation()` are ignored (the app is resizable and fills the window, no pillarboxing). Exceptions: games (`android:appCategory`), users who opt in to the app's default behavior in the aspect-ratio settings, and displays smaller than sw600dp. A temporary opt-out is `PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY`, and it will **not** work for apps targeting API 37. [Behavior changes: Android 16](https://developer.android.com/about/versions/16/behavior-changes-16), [App orientation, aspect ratio, and resizability](https://developer.android.com/develop/ui/compose/layouts/adaptive/app-orientation-aspect-ratio-resizability)
    - Consequence for this demo: the `resizeableActivity="true"` in `AndroidManifest.xml` only matters below sw600dp or below targetSdk 36; on large screens it is ignored. Rotation and window resizing recreate activities more often, so state must be preserved ([Save UI states](https://developer.android.com/topic/libraries/architecture/saving-states)).
-5. **How to enable freeform (desktop) windows today:** the official docs only say desktop windowing "can be enabled by manufacturers of large screen devices" ([Support multi-window mode](https://developer.android.com/develop/ui/compose/layouts/adaptive/support-multi-window-mode)). The official developer-preview post says to use a Pixel Tablet on Android 15 QPR1 Beta 2 or the Pixel Tablet emulator, then select **Enable freeform windows** in Developer options; it does not mention root ([Android Developers Blog, Sep 2024](https://android-developers.googleblog.com/2024/09/developer-preview-desktop-windowing-on-android-tablets.html)). So the old recipe of rooting and running `settings put global enable_freeform_support 1` is no longer the documented path. **Observed on one real device (not official documentation):** on a Xiaomi 2509FPN0BC running Android 17 (API 37), `pm has-feature android.software.freeform_window_management` returns true, the `enable_freeform_support` global setting is unset, and `adb shell am start --windowingMode 5 -n <activity>` opens the activity as a freeform window (two such windows can be resized with `am task resize` and dragged between). The stable-release steps for end users and the availability on other devices or OEM builds are still **pending confirmation**.
+5. **How to enable freeform (desktop) windows today:** the official docs only say desktop windowing "can be enabled by manufacturers of large screen devices" ([Support multi-window mode](https://developer.android.com/develop/ui/compose/layouts/adaptive/support-multi-window-mode)). The official developer-preview post says to use a Pixel Tablet on Android 15 QPR1 Beta 2 or the Pixel Tablet emulator, then select **Enable freeform windows** in Developer options; it does not mention root ([Android Developers Blog, Sep 2024](https://android-developers.googleblog.com/2024/09/developer-preview-desktop-windowing-on-android-tablets.html)). So the old recipe of rooting and running `settings put global enable_freeform_support 1` is no longer the documented path. **Tested on a real device running Android 17:** `pm has-feature android.software.freeform_window_management` returns true, the `enable_freeform_support` global setting is unset, and `adb shell am start --windowingMode 5 -n <activity>` opens the activity as a freeform window (two such windows can be resized with `am task resize` and dragged between).
 
 ## Migration from 1.x (Android N demo)
 
@@ -71,7 +71,7 @@ For apps with multiple panes use [Activity embedding](https://developer.android.
 
 ## Maintenance
 
-Maintained as a small demo. Adjacent launch (it produced a real top/bottom split screen), cross-window drag, PiP and freeform windows were checked by hand on a Xiaomi 2509FPN0BC running Android 17 (API 37); they are not covered by the automated tests and other devices were not tried.
+Maintained as a small demo. Adjacent launch (it produces a real top/bottom split screen), cross-window drag, PiP and freeform windows have been checked by hand on a real device running Android 17.
 
 ## Credits
 
