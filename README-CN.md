@@ -1,13 +1,14 @@
 # MultiWindow
 
-[![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
+[![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://developer.android.com/guide/topics/manifest/uses-sdk-element#ApiLevels)
 
 [English](README.md)
 
 一个 Kotlin 写的 **Android 多窗口 / 大屏适配演示 App**：实时显示窗口尺寸、是否多窗口、是否画中画，在相邻窗口打开另一个页面，跨窗口拖放文本，配置变化后日志不丢。这是演示 App，不是库（没有 Maven 坐标）。
 
 - 版本 2.0.0，minSdk 24，targetSdk 36，Kotlin，AppCompat DayNight（不使用 Material Components）。
-- 示例 APK 见 [Releases 页面](https://github.com/venshine/MultiWindow/releases)。
+
+[**下载示例 APK**](https://github.com/venshine/MultiWindow/releases/download/2.0.0/MultiWindow-sample-2.0.0.apk)
 
 ## 截图
 

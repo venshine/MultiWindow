@@ -1,13 +1,14 @@
 # MultiWindow
 
-[![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
+[![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://developer.android.com/guide/topics/manifest/uses-sdk-element#ApiLevels)
 
 [中文](README-CN.md)
 
 A Kotlin demo app for **multi-window and large-screen behavior** on Android: it shows the window size, multi-window and picture-in-picture state live, launches a page in the adjacent window, drags text across windows, and keeps its log across configuration changes. It is a demo app, not a library (no Maven coordinate).
 
 - Version 2.0.0, minSdk 24, targetSdk 36, Kotlin, AppCompat DayNight (no Material Components).
-- Download the sample APK from the [Releases page](https://github.com/venshine/MultiWindow/releases).
+
+[**Download the sample APK**](https://github.com/venshine/MultiWindow/releases/download/2.0.0/MultiWindow-sample-2.0.0.apk)
 
 ## Screenshot
 
