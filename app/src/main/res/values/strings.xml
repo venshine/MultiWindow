@@ -1,15 +1,74 @@
 <resources>
     <string name="app_name" translatable="false">MultiWindow</string>
-    <string name="first_title">First Activity</string>
-    <string name="second_title">Second Activity</string>
-    <string name="window_info">Window: %1$d × %2$d dp\nMulti-window: %3$s\nPicture-in-picture: %4$s</string>
+    <string name="back">Back</string>
+    <string name="theme_to_dark">Switch to dark mode</string>
+    <string name="theme_to_light">Switch to light mode</string>
+    <string name="view_source">View source</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
-    <string name="open_adjacent">Open the other page in the adjacent window</string>
-    <string name="enter_pip">Enter picture-in-picture</string>
-    <string name="clear_log">Clear log</string>
-    <string name="drag_payload_first">Text dragged from First Activity (long press to drag)</string>
-    <string name="drag_payload_second">Text dragged from Second Activity (long press to drag)</string>
+
+    <!-- Home -->
+    <string name="home_eyebrow" translatable="false">ANDROID · MULTI-WINDOW</string>
+    <string name="home_title">One app,\nmany window sizes</string>
+    <string name="home_desc">Split-screen, freeform windows, picture-in-picture and large screens: watch your window change in real time.</string>
+    <string name="home_preview">This window · drag the split divider</string>
+    <string name="home_examples">Demos</string>
+    <string name="home_examples_hint">5 scenarios</string>
+    <string name="home_license" translatable="false">Apache-2.0</string>
+    <string name="home_author" translatable="false">© venshine</string>
+    <string name="state_size">Window</string>
+    <string name="state_size_value">%1$d × %2$d dp</string>
+    <string name="state_multi">Multi-window</string>
+    <string name="state_pip">PiP</string>
+
+    <string name="demo_status">Window state &amp; callbacks</string>
+    <string name="demo_status_desc">Size, multi-window, PiP and a live callback log</string>
+    <string name="demo_adjacent">Adjacent launch</string>
+    <string name="demo_adjacent_desc">Open another page next to this one</string>
+    <string name="demo_drag">Cross-window drag</string>
+    <string name="demo_drag_desc">Drag text between two windows</string>
+    <string name="demo_pip">Picture-in-picture</string>
+    <string name="demo_pip_desc">Keep a ticking clock floating</string>
+    <string name="demo_config">Surviving recreation</string>
+    <string name="demo_config_desc">Plain field vs ViewModel</string>
+
+    <!-- Status -->
+    <string name="status_desc">Drag the split divider, rotate the device or enter picture-in-picture: every change shows up below.</string>
+    <string name="status_log">Lifecycle and callbacks</string>
+    <string name="clear_log">Clear</string>
+
+    <!-- Adjacent -->
+    <string name="adjacent_desc">Starts the other page with FLAG_ACTIVITY_LAUNCH_ADJACENT so it opens in the adjacent window.</string>
+    <string name="adjacent_open">Open the other page in the adjacent window</string>
+    <string name="adjacent_hint">Best effort: it needs split-screen, a freeform window or a large screen. On a full-screen phone the system simply opens it normally. Enter split-screen from Recents first.</string>
+    <string name="peer_title">Adjacent page</string>
+    <string name="peer_desc">I was launched from the previous page with FLAG_ACTIVITY_LAUNCH_ADJACENT.</string>
+    <string name="peer_close">Close this window</string>
+
+    <!-- Drag -->
+    <string name="drag_desc">Long-press a tag and drop it into the zone. Open a second copy in the adjacent window to drag across windows.</string>
+    <string name="drag_window">Window #%1$d</string>
+    <string name="drag_chip_a" translatable="false">Kotlin</string>
+    <string name="drag_chip_b" translatable="false">Android</string>
+    <string name="drag_chip_c" translatable="false">Window</string>
     <string name="drop_hint">Drop text here</string>
     <string name="dropped">Dropped: %1$s</string>
+    <string name="drag_received_count">Received: %1$d</string>
+    <string name="drag_open_copy">Open a copy in the adjacent window</string>
+
+    <!-- PiP -->
+    <string name="pip_desc">Enter picture-in-picture: the clock keeps running in a floating window and the controls disappear.</string>
+    <string name="pip_enter">Enter picture-in-picture</string>
+    <string name="pip_auto">Enter automatically when leaving</string>
+    <string name="pip_unsupported">This device does not support picture-in-picture.</string>
+
+    <!-- Config -->
+    <string name="config_desc">Resize the window, switch the theme or tap Recreate: this page is rebuilt. The plain field resets, the ViewModel value survives.</string>
+    <string name="config_plain">Activity field</string>
+    <string name="config_vm">ViewModel</string>
+    <string name="config_plus">+1 on both</string>
+    <string name="config_recreate">Recreate now</string>
+    <string name="config_rotate">Request landscape / portrait</string>
+    <string name="config_created">Created %1$d time(s)</string>
+    <string name="config_instance">Instance %1$s</string>
 </resources>

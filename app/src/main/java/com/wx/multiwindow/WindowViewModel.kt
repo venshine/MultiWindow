@@ -18,10 +18,9 @@ package com.wx.multiwindow
 import androidx.lifecycle.ViewModel
 
 /**
- * 当前窗口状态快照。
+ * 窗口状态快照：尺寸取自 Configuration.screenWidthDp / screenHeightDp，随窗口大小变化
  *
- * @param widthDp 窗口宽度（dp），来自 Configuration.screenWidthDp
- * @param heightDp 窗口高度（dp），来自 Configuration.screenHeightDp
+ * @author venshine
  */
 data class WindowState(
     val widthDp: Int,
@@ -31,24 +30,28 @@ data class WindowState(
 )
 
 /**
- * 保存日志和窗口状态。ViewModel 在配置变化（旋转、拖动分屏分割线）重建 Activity 后依然存在，
- * 所以日志不会丢。
+ * 状态页的回调日志：Activity 因主题切换等原因重建后日志仍在
+ *
+ * @author venshine
  */
 class WindowViewModel : ViewModel() {
 
     private val _log = ArrayList<String>()
 
-    /** 日志只读视图 */
+    /** 日志只读视图，按发生顺序排列（最新在末尾） */
     val log: List<String> get() = _log
-
-    /** 最近一次状态；Activity 每次刷新时写入 */
-    var state: WindowState? = null
 
     fun addLog(line: String) {
         _log.add(line)
+        // 只保留最近 60 条，避免长时间拖动分隔条后无限增长
+        if (_log.size > MAX_LINES) _log.removeAt(0)
     }
 
     fun clearLog() {
         _log.clear()
+    }
+
+    private companion object {
+        const val MAX_LINES = 60
     }
 }

@@ -22,18 +22,8 @@ Also verify on a real device or a large-screen emulator: launching the other pag
 ## GitHub Release
 
 - Title is the version number; notes in English.
-- Attachment: `MultiWindow-X.Y.Z.apk`, built with `./gradlew :app:assembleDebug` (output `app/build/outputs/apk/debug/app-debug.apk`) and signed with the local debug certificate so users can install over an older release.
+- Attachment: `MultiWindow-sample-X.Y.Z.apk`, built with `./gradlew :app:assembleDebug` (output `app/build/outputs/apk/debug/app-debug.apk`) and signed with the local debug certificate so users can install over an older release.
 
 ## Afterwards
 
 - No product doc or ROADMAP; the GitHub Release is the source of truth.
-
-## README screenshots
-
-If the sample UI changed, regenerate before tagging and review each PNG (not part of CI):
-
-```bash
-./gradlew :app:testDebugUnitTest -Pscreenshots --tests '*ScreenshotGenerator'
-```
-
-Output goes to `screenshot/<name>-light.png` and `-dark.png`.

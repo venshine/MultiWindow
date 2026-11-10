@@ -16,13 +16,16 @@
 package com.wx.multiwindow
 
 /**
- * 第二页：没有声明 configChanges，窗口尺寸变化时会被系统重建，靠 ViewModel 保留日志。
+ * 被「相邻窗口启动」打开的页面：显示自己所在窗口的状态，可以关闭自己
  *
  * @author venshine
  */
-class SecondActivity : BaseActivity() {
+class PeerActivity : BaseActivity(R.layout.activity_peer) {
 
-    override val pageTitle = R.string.second_title
-    override val targetClass = FirstActivity::class.java
-    override val dragPayload = R.string.drag_payload_second
+    override fun onBind() {
+        setToolbar(R.string.peer_title, "ADJACENT")
+        findViewById<android.view.View>(R.id.peer_close).setOnClickListener { finish() }
+    }
+
+    override fun onWindowEvent(event: String, state: WindowState) = bindWindowState(state)
 }

@@ -1,14 +1,61 @@
 <resources>
-    <string name="first_title">第一页</string>
-    <string name="second_title">第二页</string>
-    <string name="window_info">窗口：%1$d × %2$d dp\n多窗口：%3$s\n画中画：%4$s</string>
+    <string name="back">返回</string>
+    <string name="theme_to_dark">切换到深色模式</string>
+    <string name="theme_to_light">切换到浅色模式</string>
+    <string name="view_source">查看源码</string>
     <string name="yes">是</string>
     <string name="no">否</string>
-    <string name="open_adjacent">在相邻窗口打开另一页</string>
-    <string name="enter_pip">进入画中画</string>
-    <string name="clear_log">清理日志</string>
-    <string name="drag_payload_first">来自第一页的文本（长按拖动）</string>
-    <string name="drag_payload_second">来自第二页的文本（长按拖动）</string>
+
+    <string name="home_title">一个应用，\n无数种窗口</string>
+    <string name="home_desc">分屏、自由窗口、画中画与大屏：实时看着你的窗口怎样变化。</string>
+    <string name="home_preview">当前窗口 · 拖动分屏分隔条试试</string>
+    <string name="home_examples">示例</string>
+    <string name="home_examples_hint">5 个场景</string>
+    <string name="state_size">窗口</string>
+    <string name="state_size_value">%1$d × %2$d dp</string>
+    <string name="state_multi">多窗口</string>
+    <string name="state_pip">画中画</string>
+
+    <string name="demo_status">窗口状态与回调日志</string>
+    <string name="demo_status_desc">尺寸、多窗口、画中画与实时回调日志</string>
+    <string name="demo_adjacent">相邻窗口启动</string>
+    <string name="demo_adjacent_desc">把另一页开在当前页旁边</string>
+    <string name="demo_drag">跨窗口拖放</string>
+    <string name="demo_drag_desc">在两个窗口之间拖文本</string>
+    <string name="demo_pip">画中画</string>
+    <string name="demo_pip_desc">让时钟悬浮在屏幕一角</string>
+    <string name="demo_config">配置变化保留状态</string>
+    <string name="demo_config_desc">普通字段与 ViewModel 对比</string>
+
+    <string name="status_desc">拖动分屏分隔条、旋转设备或进入画中画：每次变化都会出现在下面。</string>
+    <string name="status_log">生命周期与回调</string>
+    <string name="clear_log">清空</string>
+
+    <string name="adjacent_desc">用 FLAG_ACTIVITY_LAUNCH_ADJACENT 启动另一页，让它打开在相邻窗口。</string>
+    <string name="adjacent_open">在相邻窗口打开另一页</string>
+    <string name="adjacent_hint">系统尽力而为：需要分屏、自由窗口或大屏。全屏手机上只会正常打开。请先从最近任务进入分屏。</string>
+    <string name="peer_title">相邻窗口里的页面</string>
+    <string name="peer_desc">我是从上一页用 FLAG_ACTIVITY_LAUNCH_ADJACENT 启动的。</string>
+    <string name="peer_close">关闭这个窗口</string>
+
+    <string name="drag_desc">长按标签拖进投放区。在相邻窗口再开一份，就能在两个窗口之间拖。</string>
+    <string name="drag_window">窗口 #%1$d</string>
     <string name="drop_hint">把文本拖到这里</string>
     <string name="dropped">已接收：%1$s</string>
+    <string name="drag_received_count">已接收：%1$d 次</string>
+    <string name="drag_open_copy">在相邻窗口再开一份</string>
+
+    <string name="pip_desc">进入画中画：时钟在悬浮窗口里继续走，控制区消失。</string>
+    <string name="pip_enter">进入画中画</string>
+    <string name="pip_auto">离开页面时自动进入</string>
+    <string name="pip_unsupported">本设备不支持画中画。</string>
+
+    <string name="config_desc">调整窗口大小、切换主题或点「立即重建」：本页会被重建。普通字段归零，ViewModel 里的值保留。</string>
+    <string name="config_plain">Activity 字段</string>
+    <string name="config_vm">ViewModel</string>
+    <string name="config_plus">两边各 +1</string>
+    <string name="config_recreate">立即重建</string>
+    <string name="config_rotate">请求横屏 / 竖屏</string>
+    <string name="config_created">已创建 %1$d 次</string>
+    <string name="config_instance">实例 %1$s</string>
 </resources>

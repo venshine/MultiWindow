@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 投放区：拖拽进入时（selected）换成强调色虚线框 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape>
+            <corners android:radius="16dp" />
+            <solid android:color="@color/accent_soft" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/accent_ink"
+                android:dashGap="6dp"
+                android:dashWidth="8dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <corners android:radius="16dp" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/line"
+                android:dashGap="6dp"
+                android:dashWidth="8dp" />
+        </shape>
+    </item>
+</selector>
